@@ -12,7 +12,25 @@ Boost是基于C++标准的库，创建于1998年
 Boost源码允许任何人自由使用、修改和分发  
 
 # Setup
-WIP  
+有一些简单的功能可以仅包含头文件。但是大多数功能比如program_options需要编译成dll/lib使用  
+
+在下面网站下载Version x.xx.x
+www.boost.org  
+本处测试使用Version 1.86.0 for windows:  
+boost_1_86_0.zip  
+解压缩后，将boost_x_xx_x拷贝至需要的位置，将该位置添加至环境变量  
+boost_x_xx_x/boost其实就是头文件。但zip中不含有编译后的文件  
+编译过程如下：  
+1、双击bootstrap.bat 
+(应该使用mingw而不是默认的cl)  
+此过程会使用默认的cl编译器
+结果会生成b2.exe
+2、双击b2.exe文件
+这一步会持续比较长的时间  
+生成的dll/lib位于stage/文件夹下
+3、配置CMakeLists.txt，包含Include Dir, Link Dir, Link Libs
+4、在源文件中include需要的头文件
+  
 
 # Boost库
 ## Boost.Program_options
