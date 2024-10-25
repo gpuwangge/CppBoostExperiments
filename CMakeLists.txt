@@ -10,6 +10,11 @@ aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
+include_directories($ENV{INCLUDE})
+
+link_directories($ENV{LIB})     
+link_libraries(libboost_program_options-vc143-mt-x64-1_86) 
+
 #add all files from SRC folder
 add_executable(${PROJECT_NAME} ${SRC}) 
 
