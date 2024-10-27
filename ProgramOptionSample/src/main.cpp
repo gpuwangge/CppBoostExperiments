@@ -1,12 +1,11 @@
 #include "../include/main.h"
-#include <boost/program_options.hpp>
 
 namespace po = boost::program_options;
 int main(int ac, char* av[]){
     po::options_description desc("Allowed options");
     desc.add_options()
-        ("help", "produce help message")
-        ("compression", po::value<int>(), "set compression level")
+        ("help,h", "produce help message")
+        ("input,i", po::value<std::string>(), "set input string")
     ;
     
     po::variables_map vm;
@@ -18,10 +17,10 @@ int main(int ac, char* av[]){
         return 1;
     }
     
-    if (vm.count("compression")) {
-        std::cout << "Compression level was set to " << vm["compression"].as<int>() << ".\n";
+    if (vm.count("input")) {
+        std::cout << "Input string was set to " << vm["input"].as<std::string>() << ".\n";
     } else {
-        std::cout << "Compression level was not set.\n";
+        std::cout << "Input string was not set.\n";
     }
 
 }

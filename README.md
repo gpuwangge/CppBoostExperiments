@@ -4,7 +4,7 @@
 > mkdir build  
 > cd build  
 > cmake -G "MinGW Makefiles" ..  
-> make  
+> make -j 
 
 
 # Introduction
@@ -14,23 +14,31 @@ Boost源码允许任何人自由使用、修改和分发
 # Setup
 有一些简单的功能可以仅包含头文件。但是大多数功能比如program_options需要编译成dll/lib使用  
 
-在下面网站下载Version x.xx.x
+在下面网站下载Version x.xx.x  
 www.boost.org  
 本处测试使用Version 1.86.0 for windows:  
 boost_1_86_0.zip  
-解压缩后，将boost_x_xx_x拷贝至需要的位置，将该位置添加至环境变量  
+解压缩后，将boost_x_xx_x拷贝至需要的位置(比如：C:\boost_1_86_0)   
 boost_x_xx_x/boost其实就是头文件。但zip中不含有编译后的文件  
 编译过程如下：  
-1、双击bootstrap.bat 
-(应该使用mingw而不是默认的cl)  
-此过程会使用默认的cl编译器
-结果会生成b2.exe
-2、双击b2.exe文件
-这一步会持续比较长的时间  
-生成的dll/lib位于stage/文件夹下
-3、配置CMakeLists.txt，包含Include Dir, Link Dir, Link Libs
-4、在源文件中include需要的头文件
-  
+1、进入boost_1_86_0.zip目录，如果使用mingw编译器，使用用如下指令：  
+> bootstrap.bat gcc  
+
+(如果直接运行bootstrap.bat，会使用默认的msvc(cl编译器)而不是mingw)  
+(如果遇到mutex error，是因为编译器没有使用posix的缘故。解决办法是下载posix版本的mingw64)  
+结果是几分钟后，会在当前目录下生成b2.exe  
+2、运行b2.exe  
+这一步会持续十几分钟  
+生成的库文件位于stage/lib/文件夹下  
+每一个boost功能都会被编译成单独的库文件，所以此文件夹下会有很多文件，可以选取需要的文件link，比如：  
+libboost_program_options-mgw8-mt-x64-1_86.a  
+3、将该位置添加至环境变量  
+include就是C:\boost_1_86_0  
+lib就是C:\boost_1_86_0\stage\lib  
+4、配置CMakeLists.txt，包含Include Dir, Link Dir, 就是上一步设置的path  
+之后Link需要的Libs，比如boost_program_options-mgw8-mt-x64-1_86  
+5、在源文件中include需要的头文件  
+比如#include <boost/program_options.hpp>  
 
 # Boost库
 ## Boost.Program_options

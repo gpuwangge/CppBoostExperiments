@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 SET(CMAKE_C_COMPILER "C:/mingw64/bin/gcc.exe")
 SET(CMAKE_CXX_COMPILER "C:/mingw64/bin/g++.exe")
-project(boostProject)
+project(programOptionSample)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE "Debug")
 
@@ -13,7 +13,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 include_directories($ENV{INCLUDE})
 
 link_directories($ENV{LIB})     
-link_libraries(libboost_program_options-vc143-mt-x64-1_86) 
+link_libraries(boost_program_options-mgw8-mt-x64-1_86) 
 
 #add all files from SRC folder
 add_executable(${PROJECT_NAME} ${SRC}) 
